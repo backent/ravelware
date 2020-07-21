@@ -1,0 +1,26 @@
+version: "3.6"
+services:
+  webserver:
+    image: nginx:latest
+    restart: unless-stopped
+    container_name: laravel_docker_nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - $PWD:/var/www/html
+    ports:
+      - 9898:80
+    networks:
+      - applaravel
+  php:
+    build: .
+    restart: unless-stopped
+    container_name: laravel_docker_php
+    volumes:
+      - $PWD:/var/www/html
+    networks: 
+      - applaravel
+networks:
+  applaravel:
+    driver: bridge
+volumes:
+  dbdata:
