@@ -25,4 +25,19 @@ class TicketController extends Controller
 
         return response()->json($result, 200);
     }
+
+    public function updateExit() {
+        $data = request()->validate([
+            'platNomor' => "required"
+        ]);
+
+        $ticket = new Ticket();
+        $result = $ticket->update_exit_by_plat($data['platNomor']);
+        if ($result != false) {
+            return response()->json($result, 200);
+        } else {
+            return response()->json(['message' => 'Plat nomor tidak ditemukan'], 404);
+        }
+        
+    }
 }

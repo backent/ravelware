@@ -19,3 +19,4 @@ Route::get('/test', function () {
 });
 
 Route::post('/ticket', 'Ticket\TicketController@store');
+Route::post('/ticket/exit', 'Ticket\TicketController@updateExit');
