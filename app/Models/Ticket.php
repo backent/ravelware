@@ -60,7 +60,7 @@ class Ticket extends Model
     	if (isset($ticket)) {
     		$timeBefore = new DateTime($ticket->tanggalMasuk);
     		$jumlahBayar = $this->count_pay($timeBefore, $ticket->tipe);
-    		
+
     		$data = [
     			'parkingLot' => null,
     			'tanggalKeluar' => date('Y-m-d H:i:s'),
@@ -102,6 +102,27 @@ class Ticket extends Model
 
 		return $price;
     	
+    }
+
+    public function get_count_by_type($type) {
+    	$data = $this->database->get('ticket');
+    	$data = collect($data);
+
+    	$result = $data->where('tipe', $type);
+    	
+    	return count($result);
+    }
+
+    public function get_plat_by_warna($warna) {
+    	$data = $this->database->get('ticket');
+    	$data = collect($data);
+
+    	$data = $data->where('warna', $warna);
+    	$result = $data->map(function($item) {
+    		return $item->platNomor;
+    	});
+
+    	return $result;
     }
 
 

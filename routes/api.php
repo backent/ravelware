@@ -20,3 +20,5 @@ Route::get('/test', function () {
 
 Route::post('/ticket', 'Ticket\TicketController@store');
 Route::post('/ticket/exit', 'Ticket\TicketController@updateExit');
+Route::post('/report/jumlahkendaraan', 'Ticket\TicketController@reportJumlah');
+Route::post('/report/platwarna', 'Ticket\TicketController@reportWarna');
