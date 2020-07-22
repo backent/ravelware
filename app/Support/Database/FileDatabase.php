@@ -11,8 +11,16 @@ class FileDatabase implements Database {
 		dd('where');
 	}
 
-	public function get() {
-		dd('get');
+	public function get($filename) {
+		$filePath = $this->folder_path . "/" .$filename;
+		$fileexist = file_exists($filePath);
+		
+        if ($fileexist) {
+            $storage = unserialize(file_get_contents($filePath));
+        } else {
+            $storage = [];
+        }
+        return $storage;
 	}
 
 	public function insert($filename, $data) {
